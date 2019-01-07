@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import cn.ksdshpx.beans.Person;
+import cn.ksdshpx.dao.BookDao;
 
 /**
  * @author peng.x
@@ -22,8 +23,15 @@ import cn.ksdshpx.beans.Person;
  * @Filter(type = FilterType.ANNOTATION, classes = { Controller.class,
  * Service.class }) })
  */
-@ComponentScan(value = "cn.ksdshpx", includeFilters = { @Filter(type = FilterType.ANNOTATION, classes = {
-		Controller.class, Service.class }) }, useDefaultFilters = false)
+@ComponentScan(value = "cn.ksdshpx", includeFilters = {
+		/*
+		 * @Filter(type = FilterType.ANNOTATION, classes = { Controller.class,
+		 * Service.class }),
+		 * 
+		 * @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = { BookDao.class,
+		 * Service.class }),
+		 */
+		@Filter(type = FilterType.CUSTOM, classes = { MyTypeFilter.class }) }, useDefaultFilters = false)
 public class MainConfig {
 	// 将person类加载到容器中，类型为返回值类型，id默认为方法名
 	@Bean
