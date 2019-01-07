@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 包扫描，会扫描加载标注了@Controller、@Service、@Repository、@Component的组件到IOC容器中 -->
+	<context:component-scan base-package="cn.ksdshpx"></context:component-scan>
 	<bean id="person" class="cn.ksdshpx.beans.Person">
 		<property name="name" value="zhangSan"></property>
 		<property name="age" value="18"></property>
