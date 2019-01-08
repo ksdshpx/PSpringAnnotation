@@ -1,11 +1,13 @@
 package cn.ksdshpx.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 
 import cn.ksdshpx.beans.Person;
+import cn.ksdshpx.condition.LinuxCondition;
+import cn.ksdshpx.condition.WindowsCondition;
 
 /**
  * @author peng.x
@@ -31,5 +33,22 @@ public class MainConfig2 {
 	public Person person() {
 		System.out.println("往容器中添加person...");
 		return new Person("wangWu", 30);
+	}
+	
+	/*
+	 * @Conditional:按照一定的条件进行判断，满足一定的条件才会将bean注册到IOC容器中
+	 * 如果系统是windows,给容器中注册bill
+	 * 如果系统是linux,给容器中注册linus
+	 */
+	@Conditional({WindowsCondition.class})
+	@Bean("bill")
+	public Person person01() {
+		return new Person("Bill",25);
+	}
+	
+	@Conditional({LinuxCondition.class})
+	@Bean("linus")
+	public Person person02() {
+		return new Person("linus",36);
 	}
 }
