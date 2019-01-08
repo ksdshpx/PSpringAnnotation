@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 
 import cn.ksdshpx.beans.Color;
+import cn.ksdshpx.beans.ColorFactoryBean;
 import cn.ksdshpx.beans.Person;
 import cn.ksdshpx.beans.Red;
 import cn.ksdshpx.condition.LinuxCondition;
@@ -66,5 +67,10 @@ public class MainConfig2 {
 	 * 	  1.@Import(要导入到容器中的组件)：容器中就会自动注册这个组件，id默认为全类名
 	 *    2.ImportSelector:返回需要导入的组件的全类名的数组
 	 *    3.ImportBeanDefinitionRegistrar:手动注册bean到容器中
+	 * 4)使用Spring提供的FactoryBean(工厂Bean)
 	 */
+	@Bean
+	public ColorFactoryBean colorFactoryBean() {
+		return new ColorFactoryBean();
+	}
 }
