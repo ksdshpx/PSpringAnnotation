@@ -3,9 +3,12 @@ package cn.ksdshpx.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 
+import cn.ksdshpx.beans.Color;
 import cn.ksdshpx.beans.Person;
+import cn.ksdshpx.beans.Red;
 import cn.ksdshpx.condition.LinuxCondition;
 import cn.ksdshpx.condition.WindowsCondition;
 
@@ -13,6 +16,7 @@ import cn.ksdshpx.condition.WindowsCondition;
  * @author peng.x
  * @date 2019年1月7日 下午9:34:15
  */
+@Import({ Color.class, Red.class })
 @Configuration
 public class MainConfig2 {
 	// 默认是单实例的
@@ -51,4 +55,12 @@ public class MainConfig2 {
 	public Person person02() {
 		return new Person("linus",36);
 	}
+	
+	/**
+	 * 给容器中导入组件
+	 * 1)包扫描+组件标注注解（@Controller/@Service/@Repository/@Component）[自己写的类]
+	 * 2)@Bean[导入的第三方包里的组件]
+	 * 3)@Import[快速给容器中导入一个组件]
+	 * 	  1.@Import(要导入到容器中的组件)：容器中就会自动注册这个组件，id默认为全类名
+	 */
 }
