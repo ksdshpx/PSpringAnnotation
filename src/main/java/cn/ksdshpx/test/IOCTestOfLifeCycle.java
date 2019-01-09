@@ -11,6 +11,7 @@ import cn.ksdshpx.config.MainConfigOfLifeCycle;;
 public class IOCTestOfLifeCycle {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MainConfigOfLifeCycle.class);
+		System.out.println("容器创建完成...");
 		ctx.close();
 	}
 }
