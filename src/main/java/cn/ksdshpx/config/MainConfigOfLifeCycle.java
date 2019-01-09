@@ -28,6 +28,9 @@ public class MainConfigOfLifeCycle {
 	 * 1)指定初始化和销毁方法
 	 * 		通过@Bean指定init-method和destroy-method
 	 * 2)通过让Bean实现InitializingBean接口(初始化逻辑)，实现DisposableBean接口(定义销毁逻辑)
+	 * 3)可以使用JSR250规范：
+	 * 		@PostConstruct:在Bean创建完成并属性赋值完成后来执行初始化
+	 * 	    @PreDestroy:在容器销毁Bean之前通知进行清理工作
 	 */
 	//@Scope("prototype")
 	@Bean(initMethod="init",destroyMethod="destroy")
