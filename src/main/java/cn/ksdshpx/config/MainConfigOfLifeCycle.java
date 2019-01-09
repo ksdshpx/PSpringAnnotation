@@ -31,6 +31,9 @@ public class MainConfigOfLifeCycle {
 	 * 3)可以使用JSR250规范：
 	 * 		@PostConstruct:在Bean创建完成并属性赋值完成后来执行初始化
 	 * 	    @PreDestroy:在容器销毁Bean之前通知进行清理工作
+	 * 4)BeanPostProcessor:Bean的后置处理器，在Bean初始化前后进行一些处理工作
+	 * 			postProcessBeforeInitialization：在初始化之前工作
+	 * 			postProcessAfterInitialization：在初始化之后工作
 	 */
 	//@Scope("prototype")
 	@Bean(initMethod="init",destroyMethod="destroy")

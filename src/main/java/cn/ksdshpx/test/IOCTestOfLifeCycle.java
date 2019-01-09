@@ -1,5 +1,4 @@
 package cn.ksdshpx.test;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import cn.ksdshpx.config.MainConfigOfLifeCycle;;
