@@ -8,15 +8,14 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class Person {
 	/**
-	 * 使用@Value赋值
-	 * 1.基本数值
-	 * 2.SpEL表达式
-	 * 3.可以写${}:取出配置文件中的值（在运行环境变量里面的值）
+	 * 使用@Value赋值 1.基本数值 2.SpEL表达式 3.可以写${}:取出配置文件中的值（在运行环境变量里面的值）
 	 */
 	@Value("zhangSan")
 	private String name;
 	@Value("#{20-5}")
 	private Integer age;
+	@Value("${person.nickname}")
+	private String nickName;
 
 	public Person() {
 		super();
@@ -26,6 +25,21 @@ public class Person {
 		super();
 		this.name = name;
 		this.age = age;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public Person(String name, Integer age, String nickName) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.nickName = nickName;
 	}
 
 	public String getName() {
@@ -46,7 +60,7 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [name=" + name + ", age=" + age + "]";
+		return "Person [name=" + name + ", age=" + age + ", nickName=" + nickName + "]";
 	}
 
 }
