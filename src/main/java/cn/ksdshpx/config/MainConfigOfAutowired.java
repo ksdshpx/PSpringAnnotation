@@ -28,6 +28,11 @@ import cn.ksdshpx.beans.Color;
  * 		1.标注在方法位置
  * 		2.标注在构造器位置：如果组件只有一个有参构造器，这个有参构造器的@Autowired可以省略
  * 		3.标注在参数位置
+ * 
+ * 4)自定义组件想要使用Spring底层的一些组件(ApplicationContext、BeanFactory)
+ * 		只需要让自定义组件实现XxxAware接口:在创建对象的时候会调用接口规定的方法，注入相关组件
+ * 		把Spring的一些底层组件注入到自定义的bean中
+ * 		XxxAware的功能都是使用XxxAwareProcessor(BeanPostProcessor的实现类)来处理的
  */
 @ComponentScan({"cn.ksdshpx.controller","cn.ksdshpx.service","cn.ksdshpx.dao","cn.ksdshpx.beans"})
 @Configuration
