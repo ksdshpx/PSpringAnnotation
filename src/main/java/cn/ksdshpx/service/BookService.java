@@ -1,7 +1,7 @@
 package cn.ksdshpx.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import cn.ksdshpx.dao.BookDao;
@@ -12,8 +12,9 @@ import cn.ksdshpx.dao.BookDao;
  */
 @Service
 public class BookService {
-	@Qualifier("bookDao")
-	@Autowired(required=false)
+	//@Qualifier("bookDao")
+	//@Autowired(required=false)
+	@Resource
 	private BookDao bookDao;
 
 	@Override
