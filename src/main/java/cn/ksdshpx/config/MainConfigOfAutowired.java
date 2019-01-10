@@ -1,7 +1,11 @@
 package cn.ksdshpx.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import cn.ksdshpx.beans.Car;
+import cn.ksdshpx.beans.Color;
 
 /**
  * @author peng.x
@@ -19,9 +23,25 @@ import org.springframework.context.annotation.Configuration;
  * 		1.@Resource:和@Autowired一样可以实现自动装配，但它默认是按照组件名称进行自动装配
  * 		            没有支持@Primary功能，没有支持@Autowired(required=false)功能
  *      2.@Inject:需要导入javax.inject包，和@Autowired的功能一样，没有支持@Autowired(required=false)功能
+ *      
+ * 3)@Autowired标注位置：构造器、方法、参数、属性：都是从IOC容器中获取参数组件的值
+ * 		1.标注在方法位置
+ * 		2.标注在构造器位置：如果组件只有一个有参构造器，这个有参构造器的@Autowired可以省略
+ * 		3.标注在参数位置
  */
-@ComponentScan({"cn.ksdshpx.controller","cn.ksdshpx.service","cn.ksdshpx.dao"})
+@ComponentScan({"cn.ksdshpx.controller","cn.ksdshpx.service","cn.ksdshpx.dao","cn.ksdshpx.beans"})
 @Configuration
 public class MainConfigOfAutowired {
 
+	/**
+	 * @Bean标注的方法创建对象的时候，方法参数的值从IOC容器中获取
+	 * @param car
+	 * @return
+	 */
+	@Bean
+	public Color color(Car car) {
+		Color color = new Color();
+		color.setCar(car);
+		return color;
+	}
 }
