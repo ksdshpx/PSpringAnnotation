@@ -1,8 +1,8 @@
 package cn.ksdshpx.config;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 
 import cn.ksdshpx.aop.LogAspect;
 import cn.ksdshpx.aop.MathCalculator;
@@ -31,6 +31,27 @@ import cn.ksdshpx.aop.MathCalculator;
  * 1).将业务逻辑组件和切面类都加入到容器中，告诉Spring哪个是切面类
  * 2).在切面类上的每个通知方法上都标注通知注解，告诉Spring何时何地运行（切入点表达式）
  * 3).开启基于注解的AOP模式
+ * 
+ * AOP原理：【看给容器中注册了什么组件，这个组件什么时候工作，这个组件工作的功能是什么】
+ * 1.@EnableAspectJAutoProxy是什么？
+ * 		@Import(AspectJAutoProxyRegistrar.class)：给容器中导入AspectJAutoProxyRegistrar组件
+ * 			利用AspectJAutoProxyRegistrar自定义给容器中注册bean:
+ * 			internalAutoProxyCreator=AnnotationAwareAspectJAutoProxyCreator
+ * 			给容器中注册AnnotationAwareAspectJAutoProxyCreator
+ * 
+ * 2.AnnotationAwareAspectJAutoProxyCreator：
+ * 		AnnotationAwareAspectJAutoProxyCreator
+ * 			->AspectJAwareAdvisorAutoProxyCreator
+ * 				->AbstractAdvisorAutoProxyCreator
+ * 					->AbstractAutoProxyCreator
+ * 						implements SmartInstantiationAwareBeanPostProcessor,BeanFactoryAware
+ * 						关注后置处理器（在bean初始化前后做事情）、自动装配BeanFactory
+ * AbstractAutoProxyCreator.setBeanFactory()
+ * AbstractAutoProxyCreator有后置处理器的逻辑
+ * 
+ * AbstractAdvisorAutoProxyCreator.setBeanFactory()-->initBeanFactory()
+ * 
+ * AnnotationAwareAspectJAutoProxyCreator.initBeanFactory
  */
 @EnableAspectJAutoProxy
 @Configuration
